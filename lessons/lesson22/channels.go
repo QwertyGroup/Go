@@ -1,18 +1,18 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
-func foo(c chan int, someValue int) {
-	c <- someValue * 5
+func zuu(c chan int, val int) {
+	c <- val * 5
 }
 
 func main() {
-	fooVal := make(chan int)
-
-	go foo(fooVal, 5)
-	go foo(fooVal, 3)
-
-	v1, v2 := <-fooVal, <-fooVal
-
-	fmt.Println(v1, v2)
+	zuuchan := make(chan int)
+	go zuu(zuuchan, 3)
+	go zuu(zuuchan, 5)
+	go zuu(zuuchan, 1<<16)
+	v1, v2, v3 := <-zuuchan, <-zuuchan, <-zuuchan // This has to happend. Blocking
+	fmt.Println(v1, v2, v3)
 }
