@@ -85,7 +85,7 @@ func ScoreReview(ctx context.Context, e FirestoreEvent) error {
 
 	ref := client.Collection("scores").Doc(review.Author.Value)
 	var err error
-	_, err = ref.Set(ctx, MovieReview{Author: "Yolandi", Text: "Hello Welcome" + strconv.Itoa(reviweScore)})
+	_, err = ref.Set(ctx, MovieReview{Author: review.Author.Value, Text: "score: " + strconv.Itoa(reviweScore)})
 	// var err error
 	// _, err = ref.Update(ctx, []firestore.Update{{Value: "Sacramento-" + strconv.Itoa(reviweScore)}})
 	// return err
